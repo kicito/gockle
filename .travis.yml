@@ -1,3 +1,6 @@
+sudo: required
+services:
+    - cassandra
 language: go
 go:
     - tip
