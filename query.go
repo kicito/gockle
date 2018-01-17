@@ -44,7 +44,7 @@ type Query interface {
 }
 
 var (
-	_ Query = QueryMock{}
+	_ Query = &QueryMock{}
 	_ Query = query{}
 )
 
@@ -54,42 +54,42 @@ type QueryMock struct {
 }
 
 // PageSize implements Query.
-func (m QueryMock) PageSize(n int) Query {
+func (m *QueryMock) PageSize(n int) Query {
 	return m.Called(n).Get(0).(Query)
 }
 
 // WithContext implements Query.
-func (m QueryMock) WithContext(ctx context.Context) Query {
+func (m *QueryMock) WithContext(ctx context.Context) Query {
 	return m.Called(ctx).Get(0).(Query)
 }
 
 // PageState implements Query.
-func (m QueryMock) PageState(state []byte) Query {
+func (m *QueryMock) PageState(state []byte) Query {
 	return m.Called(state).Get(0).(Query)
 }
 
 // Exec implements Query.
-func (m QueryMock) Exec() error {
+func (m *QueryMock) Exec() error {
 	return m.Called().Error(0)
 }
 
 // Iter implements Query.
-func (m QueryMock) Iter() Iterator {
+func (m *QueryMock) Iter() Iterator {
 	return m.Called().Get(0).(Iterator)
 }
 
 // MapScan implements Query.
-func (m QueryMock) MapScan(mm map[string]interface{}) error {
+func (m *QueryMock) MapScan(mm map[string]interface{}) error {
 	return m.Called(mm).Error(0)
 }
 
 // Scan implements Query.
-func (m QueryMock) Scan(dest ...interface{}) error {
+func (m *QueryMock) Scan(dest ...interface{}) error {
 	return m.Called(dest).Error(0)
 }
 
 // Release implements Query.
-func (m QueryMock) Release() {
+func (m *QueryMock) Release() {
 	m.Called()
 }
 
