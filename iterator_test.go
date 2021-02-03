@@ -42,7 +42,7 @@ func TestIterator(t *testing.T) {
 			t.Errorf("Actual WillSwitchPage true, expected false")
 		}
 
-		if state := i.PageState(); state != nil {
+		if state := i.PageState(); len(state) != 0 {
 			t.Errorf("Actual PageState not nil, expected nil")
 		}
 
@@ -158,7 +158,7 @@ func TestIteratorPaging(t *testing.T) {
 			t.Errorf("Actual WillSwitchPage true, expected false")
 		}
 		state = i.PageState()
-		if state != nil {
+		if len(state) != 0 {
 			t.Errorf("Actual PageState not nil, expected nil")
 		}
 	}
